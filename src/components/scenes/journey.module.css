@@ -1,0 +1,82 @@
+.journey {
+  position: relative; padding: clamp(6rem, 10vw, 10rem) var(--gutter);
+  background:
+    linear-gradient(rgba(34,28,31,.05) 1px, transparent 1px) 0 0 / 100% 2.2rem,
+    var(--color-paper);
+}
+.inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: minmax(280px, 0.8fr) 1.6fr; gap: clamp(2rem, 5vw, 5rem); }
+.side { position: sticky; top: 6rem; align-self: start; }
+.side h2 { font-size: var(--step-3); }
+.year { display: flex; margin-top: 2.5rem; font-family: var(--font-display); font-size: clamp(5rem, 2rem + 8vw, 11rem); line-height: 1; color: var(--color-bubble); text-shadow: 0.02em 0.03em 0 var(--color-bubble-deep); }
+.digitWin { display: inline-block; height: 1.05em; overflow: hidden; }
+.digitCol { display: flex; flex-direction: column; }
+.digitCol span { height: 1.05em; display: block; }
+.fixed { display: inline-block; }
+.years { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.4rem 0 0; padding: 0; font-size: 0.8rem; }
+.years li { padding: 0.25rem 0.6rem; border-radius: 999px; border: 1.2px solid rgba(34,28,31,.3); transition: background .3s, color .3s, border-color .3s; }
+.years li[aria-current="true"] { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.6rem 0 0; font-size: 0.8rem; }
+.legend i { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; margin-right: 0.3rem; vertical-align: -0.05rem; }
+.dotEng { background: var(--color-wine); }
+.dotMedia { background: var(--color-bubble); }
+.dotBoth { background: linear-gradient(90deg, var(--color-wine) 50%, var(--color-bubble) 50%); }
+
+.listWrap { position: relative; }
+.thread { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.thread path { fill: none; stroke: var(--color-wine); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 0; stroke-linecap: round; opacity: 0.55; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 3.4rem; }
+.item { position: relative; width: min(100%, 470px); }
+.left { justify-self: start; }
+.right { justify-self: end; }
+.item::before { content: ""; position: absolute; left: 50%; top: 16px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; z-index: 2; border: 2px solid var(--color-ink); background: var(--color-paper); }
+.w_eng::before { background: var(--color-wine); }
+.w_media::before { background: var(--color-bubble); }
+.w_both::before { background: linear-gradient(90deg, var(--color-wine) 50%, var(--color-bubble) 50%); }
+
+.body { margin: 0.6rem 0 0; font-size: 0.92rem; line-height: 1.5; }
+
+.card {
+  position: relative; padding: 1.4rem 1.4rem 1.4rem 2.6rem; background:
+    linear-gradient(90deg, transparent 1.8rem, rgba(123,30,58,.45) 1.8rem 1.9rem, transparent 1.9rem),
+    repeating-linear-gradient(180deg, #fbf8f4 0 1.55rem, rgba(110,150,190,.25) 1.55rem calc(1.55rem + 1px)) #fbf8f4;
+  box-shadow: 0 18px 30px -20px rgba(34,28,31,.6), 0 1px 3px rgba(34,28,31,.12); rotate: -1deg;
+}
+.right .card { rotate: 1.2deg; }
+.cardWhen { margin: 0; font-size: 1.4rem; color: var(--color-wine); line-height: 1; }
+.cardTitle { margin: 0.3rem 0 0; font-family: var(--font-serif); font-size: var(--step-1); line-height: 1.15; }
+.cardWhere { margin: 0.25rem 0 0; font-size: 0.85rem; font-weight: 600; }
+
+.ticket { display: flex; filter: drop-shadow(0 16px 18px rgba(34,28,31,.28)); rotate: 1deg; }
+.left .ticket { rotate: -1.5deg; }
+.ticketMain { flex: 1; padding: 1.1rem 1.3rem; background: var(--color-ink); color: var(--color-paper); border-radius: 12px 0 0 12px;
+  -webkit-mask: radial-gradient(circle at 100% 0, transparent 10px, #000 10.5px) top / 100% 51% no-repeat, radial-gradient(circle at 100% 100%, transparent 10px, #000 10.5px) bottom / 100% 51% no-repeat;
+  mask: radial-gradient(circle at 100% 0, transparent 10px, #000 10.5px) top / 100% 51% no-repeat, radial-gradient(circle at 100% 100%, transparent 10px, #000 10.5px) bottom / 100% 51% no-repeat; }
+.ticketTop { display: flex; justify-content: space-between; margin: 0 0 0.6rem; font-size: 0.68rem; color: var(--color-bubble); }
+.ticketTitle { margin: 0; font-family: var(--font-serif); font-size: var(--step-1); line-height: 1.15; }
+.ticketWhere { margin: 0.25rem 0 0; font-size: 0.85rem; opacity: 0.8; }
+.ticketStub { width: 64px; background: var(--color-bubble); color: var(--color-ink); border-radius: 0 12px 12px 0; border-left: 2px dashed var(--color-ink); display: grid; place-items: center; }
+.ticketStub span { writing-mode: vertical-rl; font-weight: 700; letter-spacing: 0.25em; }
+
+.stamp { position: relative; width: 210px; height: 210px; rotate: -10deg; color: var(--color-wine); }
+.right .stamp { margin-left: auto; rotate: 8deg; }
+.stampRing { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stampRing text { font: 700 13px var(--font-mono); fill: currentColor; letter-spacing: 0.05em; }
+.stamp::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 2.5px solid currentColor; }
+.stamp::after { content: ""; position: absolute; inset: 34px; border-radius: 50%; border: 1.5px dashed currentColor; }
+.stampCore { position: absolute; inset: 40px; border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 0.6rem; background: rgba(244,166,198,.35); }
+.stampTitle { margin: 0; font-family: var(--font-serif); font-style: italic; font-size: 0.92rem; line-height: 1.15; color: var(--color-ink); }
+.item:has(.stamp)::before { left: 105px; }
+.right:has(.stamp)::before { left: auto; right: 105px; margin: 0 -8px 0 0; }
+
+.snap { width: min(100%, 420px); rotate: -3deg; margin: 0; }
+.snap :global(.photo) { aspect-ratio: 16 / 10; }
+.item:has(.snap)::before { display: none; }
+
+@media (max-width: 899px) {
+  .inner { grid-template-columns: 1fr; }
+  .side { position: relative; top: auto; }
+  .year { margin-top: 1.5rem; font-size: 4.4rem; }
+  .legend { display: none; }
+  .right, .left { justify-self: stretch; width: auto; }
+  .item::before { display: none; }
+}

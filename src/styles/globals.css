@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* ---------- Fonts (self-hosted via Fontsource, no network at runtime) ---------- */
+@import "@fontsource/shrikhand/400.css";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/400-italic.css";
+@import "@fontsource/playfair-display/700-italic.css";
+@import "@fontsource/caveat/500.css";
+@import "@fontsource/caveat/700.css";
+@import "@fontsource-variable/inter-tight/index.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+/* ---------- Design tokens ---------- */
+@theme {
+  --color-paper: #ece4da;      /* printed paper, slightly pink-grey */
+  --color-paper-2: #e3d8cc;    /* shadowed paper, card backs */
+  --color-bubble: #f4a6c6;     /* bubblegum: display type, creative world */
+  --color-bubble-deep: #e57fab;
+  --color-wine: #7b1e3a;       /* from the scarf in her portrait: accents, links */
+  --color-ink: #221c1f;        /* warm black for type */
+  --color-term: #2b2628;       /* the engineering world's terminal */
+  --color-graphite: #a39793;   /* un-filled / faded type */
+  --color-lime: #c9e265;       /* tiny success signal only (200 OK, approved) */
+
+  --font-display: "Shrikhand", "Cooper Black", serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-hand: "Caveat", "Bradley Hand", cursive;
+  --font-sans: "Inter Tight Variable", "Inter Tight", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --step--1: clamp(0.84rem, 0.8rem + 0.15vw, 0.94rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.4vw, 2.6rem);
+  --step-3: clamp(2.2rem, 1.6rem + 3vw, 4.6rem);
+  --step-4: clamp(3rem, 1.8rem + 6vw, 8rem);
+  --step-5: clamp(4.2rem, 1rem + 14vw, 17rem);
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-wine) transparent;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  font-size: var(--step-0);
+  line-height: 1.55;
+  overflow-x: clip;
+}
+
+::selection { background: var(--color-bubble); color: var(--color-ink); }
+
+:focus-visible {
+  outline: 2.5px dashed var(--color-wine);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+a { color: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: fixed; left: 1rem; top: -4rem; z-index: 300;
+  background: var(--color-ink); color: var(--color-paper);
+  padding: 0.6rem 1rem; border-radius: 999px; transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Film grain: one fixed layer for the whole experience ---------- */
+.grain {
+  position: fixed; inset: -50%; z-index: 200; pointer-events: none;
+  opacity: 0.11; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 0.9s steps(4) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-1%, -2%); }
+  100% { transform: translate(3%, 1%); }
+}
+
+/* ---------- Photography rules ----------
+   1. Default: warm monochrome, lifted blacks, +contrast. Same for every photo.
+   2. Halftone dot screen on top (multiply), masked to the subject for cut-outs.
+   3. Colour returns only on interaction (hover / focus / active) — her real colours are the reward. */
+.photo {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--color-paper-2);
+}
+.photo img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) sepia(0.18) contrast(1.12) brightness(1.04);
+  transition: filter 0.7s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: radial-gradient(circle at center, rgba(34, 28, 31, 0.55) 0.9px, transparent 1.3px);
+  background-size: 4px 4px; mix-blend-mode: multiply; opacity: 0.45;
+  transition: opacity 0.6s;
+}
+.photo[data-colour="true"] img,
+.photo:hover img,
+.photo:focus-within img { filter: grayscale(0) sepia(0.08) contrast(1.04); }
+.photo:hover::after, .photo[data-colour="true"]::after { opacity: 0.12; }
+
+/* Polaroid frame */
+.polaroid {
+  background: #f8f4ee; padding: 0.7rem 0.7rem 2.6rem; box-shadow:
+    0 1px 0 rgba(0,0,0,.04), 0 18px 30px -18px rgba(34,28,31,.45), 0 2px 6px rgba(34,28,31,.12);
+}
+.polaroid figcaption {
+  font-family: var(--font-hand); font-size: 1.35rem; line-height: 1.1; color: var(--color-ink);
+  padding-top: 0.55rem; text-align: center;
+}
+
+/* Washi tape */
+.tape {
+  position: absolute; width: 6.5rem; height: 1.6rem; z-index: 3;
+  background: repeating-linear-gradient(90deg, rgba(244,166,198,.85) 0 8px, rgba(244,166,198,.65) 8px 16px);
+  mask: linear-gradient(90deg, transparent 0 3px, #000 3px calc(100% - 3px), transparent calc(100% - 3px)),
+        radial-gradient(circle, #000 60%, transparent 61%) 0 0/6px 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+
+/* Reusable bits */
+.hand { font-family: var(--font-hand); }
+.mono { font-family: var(--font-mono); }
+.display { font-family: var(--font-display); font-weight: 400; }
+.serif { font-family: var(--font-serif); }
+
+.btn {
+  --bg: var(--color-ink); --fg: var(--color-paper);
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.85rem 1.35rem; border-radius: 999px;
+  background: var(--bg); color: var(--fg);
+  font-weight: 600; font-size: var(--step--1); text-decoration: none;
+  border: 1.5px solid var(--color-ink); cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.4s var(--ease-back);
+}
+.btn:hover { --bg: var(--color-bubble); --fg: var(--color-ink); }
+.btn--ghost { --bg: transparent; --fg: var(--color-ink); }
+.btn--light { --bg: var(--color-paper); --fg: var(--color-ink); border-color: var(--color-paper); }
+.btn svg { width: 1em; height: 1em; }
+
+.section { position: relative; }
+
+/* Cursor (pointer devices only, created by components/Cursor.tsx) */
+.cursor-dot, .cursor-ring { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 250; }
+.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--color-wine); }
+.cursor-ring {
+  width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%;
+  border: 1.5px solid var(--color-ink); display: grid; place-items: center;
+  font: 600 11px/1 var(--font-sans); color: var(--color-ink);
+  transition: width .35s var(--ease-out-expo), height .35s var(--ease-out-expo), margin .35s var(--ease-out-expo), background .3s, border-color .3s;
+}
+.cursor-ring[data-label]:not([data-label=""]) {
+  width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--color-bubble); border-color: var(--color-bubble);
+}
+.cursor-ring[data-dark="true"] { border-color: var(--color-paper); }
+@media (hover: none), (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+
+/* Reduced motion: everything is visible and still */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  .grain { animation: none; }
+}

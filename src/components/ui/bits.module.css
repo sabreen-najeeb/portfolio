@@ -1,0 +1,45 @@
+.mark {
+  display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; flex: none;
+  color: var(--color-wine);
+}
+.mark img, .mark svg { width: 70%; height: 70%; object-fit: contain; }
+.markLabel { font-size: var(--step--1); }
+
+.beads { position: relative; display: inline-flex; align-items: flex-start; gap: 3px; padding: 4px 6px 18px; }
+.string { position: absolute; left: 0; top: 10px; width: 100%; height: 40px; overflow: visible; }
+.bead {
+  position: relative; display: grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; border-radius: 0.42rem;
+  background: radial-gradient(circle at 30% 25%, #fff, #f1ece6 55%, #d8cfc6);
+  box-shadow: inset -1px -2px 2px rgba(0,0,0,.12), 0 2px 3px rgba(34,28,31,.25);
+  font: 700 0.85rem/1 var(--font-sans); color: var(--color-ink);
+}
+.gap { width: 0.7rem; }
+
+.sphere {
+  display: inline-block; width: 0.42em; height: 0.42em; border-radius: 50%; flex: none;
+  box-shadow: inset -0.06em -0.08em 0.12em rgba(0,0,0,.28), 0.04em 0.12em 0.18em rgba(34,28,31,.18);
+}
+.sphere_pink { background: radial-gradient(circle at 32% 28%, #ffe1ee 0 8%, #f4a6c6 30%, #d9709f 100%); }
+.sphere_wine { background: radial-gradient(circle at 32% 28%, #e8a0b4 0 6%, #a3324f 32%, #5b1129 100%); }
+.sphere_ink { background: radial-gradient(circle at 32% 28%, #8a7f83 0 6%, #3a3134 34%, #121012 100%); }
+.sphere_paper { background: radial-gradient(circle at 32% 28%, #fff 0 10%, #ece4da 40%, #bfb2a5 100%); }
+
+.chapter { position: relative; }
+.meta {
+  display: flex; align-items: baseline; gap: 0.9rem; margin: 0 0 1rem; overflow: hidden;
+  font-size: var(--step--1); color: color-mix(in srgb, var(--color-ink) 70%, transparent);
+}
+.no { font-family: var(--font-serif); font-style: italic; font-size: 1.4em; color: var(--color-wine); }
+.dark .meta { color: color-mix(in srgb, var(--color-paper) 70%, transparent); }
+.dark .no { color: var(--color-bubble); }
+.title {
+  margin: 0; display: flex; align-items: flex-end; flex-wrap: wrap;
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--step-4);
+  line-height: 0.95; letter-spacing: -0.02em;
+}
+.titleText { overflow: hidden; padding-bottom: 0.08em; }
+.titleSphere { margin: 0 0 0.16em 0.08em; }
+.dark .title { color: var(--color-paper); }
+
+.scribble { width: 9rem; height: auto; overflow: visible; }

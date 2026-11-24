@@ -1,0 +1,11 @@
+.fig { margin: 0; }
+.svg { width: 100%; height: auto; display: block; overflow: visible; }
+.edge { fill: none; stroke: #221c1f; stroke-width: 1.8; }
+.dashed { stroke-dasharray: 0.02 0.015; animation: march 6s linear infinite; }
+@keyframes march { to { stroke-dashoffset: -1; } }
+.packet { fill: var(--color-bubble-deep); stroke: #221c1f; stroke-width: 1.4; }
+.label { font: 700 14px var(--font-sans); letter-spacing: -0.01em; }
+.sub { font: 400 11px var(--font-sans); opacity: 0.75; }
+.caption { margin-top: 0.9rem; font-size: 0.82rem; line-height: 1.4; color: color-mix(in srgb, currentColor 75%, transparent); max-width: 60ch; }
+.caption span { font-family: var(--font-serif); font-style: italic; color: var(--color-wine); }
+@media (prefers-reduced-motion: reduce) { .packet { display: none; } .dashed { animation: none; } }
